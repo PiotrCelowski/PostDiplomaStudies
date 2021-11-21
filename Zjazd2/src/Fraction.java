@@ -3,32 +3,30 @@ public class Fraction {
     private int denominator = 0;
 
     public static Fraction JEDEN = new Fraction(1,1);
-    public static Fraction ZERO = new Fraction(0,0);
+    public static Fraction ZERO = new Fraction(0,1);
 
     public Fraction(int nominator, int denominator) {
-        this.nominator = nominator;
-        this.denominator = denominator;
+        if(denominator > 0) {
+            this.nominator = nominator;
+            this.denominator = denominator;
+        } else if(denominator < 0) {
+            this.nominator = -nominator;
+            this.denominator = -denominator;
+        } else if(denominator == 0) {
+            throw new ArithmeticException("Denominator cannot be zero!");
+        }
     }
 
     public Fraction(int nominator) {
-        this.nominator = nominator;
-        this.denominator = 1;
+        this(nominator, 1);
     }
 
     public int getNominator() {
         return nominator;
     }
 
-    public void setNominator(int nominator) {
-        this.nominator = nominator;
-    }
-
     public int getDenominator() {
         return denominator;
-    }
-
-    public void setDenominator(int denominator) {
-        this.denominator = denominator;
     }
 
     public Fraction add(Fraction anotherFraction) {
@@ -83,7 +81,7 @@ public class Fraction {
     }
 
     public static void main(String[] args) {
-        Fraction a = new Fraction(1, 2);
+        Fraction a = new Fraction(1, -2);
         Fraction b = new Fraction(4);
         System.out.println(Fraction.ZERO);
         System.out.println(a.add(b).toString());
