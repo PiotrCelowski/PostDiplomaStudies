@@ -1,19 +1,19 @@
 public class Fraction {
-    private int nominator = 0;
-    private int denominator = 0;
+    private final int nominator;
+    private final int denominator;
 
     public static Fraction JEDEN = new Fraction(1,1);
     public static Fraction ZERO = new Fraction(0,1);
 
     public Fraction(int nominator, int denominator) {
-        if(denominator > 0) {
-            this.nominator = nominator;
-            this.denominator = denominator;
-        } else if(denominator < 0) {
+        if(denominator < 0) {
             this.nominator = -nominator;
             this.denominator = -denominator;
         } else if(denominator == 0) {
             throw new ArithmeticException("Denominator cannot be zero!");
+        } else {
+            this.nominator = nominator;
+            this.denominator = denominator;
         }
     }
 
@@ -30,46 +30,29 @@ public class Fraction {
     }
 
     public Fraction add(Fraction anotherFraction) {
-        int newNominator;
-        int newDenominator;
-
-        if(checkDenominators(this, anotherFraction)) {
-            newNominator = this.getNominator() + anotherFraction.getNominator();
-            newDenominator = this.getDenominator();
-        } else {
-            newNominator = this.getNominator() * anotherFraction.getDenominator()
-                    + anotherFraction.getNominator() * this.getDenominator();
-            newDenominator = this.getDenominator() * anotherFraction.getDenominator();
-        }
-
+        int newNominator = this.getNominator() * anotherFraction.getDenominator()
+                + anotherFraction.getNominator() * this.getDenominator();
+        int newDenominator = this.getDenominator() * anotherFraction.getDenominator();
         return new Fraction(newNominator, newDenominator);
     }
 
     public Fraction sub(Fraction anotherFraction) {
-        int newNominator;
-        int newDenominator;
-
-        if(checkDenominators(this, anotherFraction)) {
-            newNominator = this.getNominator() - anotherFraction.getNominator();
-            newDenominator = this.getDenominator();
-        } else {
-            newNominator = this.getNominator() * anotherFraction.getDenominator()
+        int newNominator = this.getNominator() * anotherFraction.getDenominator()
                     - anotherFraction.getNominator() * this.getDenominator();
-            newDenominator = this.getDenominator() * anotherFraction.getDenominator();
-        }
-
+        int newDenominator = this.getDenominator() * anotherFraction.getDenominator();
         return new Fraction(newNominator, newDenominator);
     }
 
     public Fraction multiply(Fraction anotherFraction) {
-        return new Fraction(this.getNominator() * anotherFraction.getNominator(), this.getDenominator() * anotherFraction.getDenominator());
+        int newNominator = this.getNominator() * anotherFraction.getNominator();
+        int newDenominator = this.getDenominator() * anotherFraction.getDenominator();
+        return new Fraction(newNominator, newDenominator);
     }
 
-    private boolean checkDenominators(Fraction oneFraction, Fraction anotherFraction) {
-        if(oneFraction.getDenominator() == anotherFraction.getDenominator()) {
-            return true;
-        }
-        return false;
+    public Fraction divide(Fraction anotherFraction) {
+        int newNominator = this.getNominator() * anotherFraction.getDenominator();
+        int newDenominator = this.getDenominator() * anotherFraction.getNominator();
+        return new Fraction(newNominator, newDenominator);
     }
 
     @Override
@@ -87,5 +70,6 @@ public class Fraction {
         System.out.println(a.add(b).toString());
         System.out.println(a.sub(b).toString());
         System.out.println(a.multiply(b).toString());
+        System.out.println(a.divide(b));
     }
 }
