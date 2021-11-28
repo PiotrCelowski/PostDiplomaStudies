@@ -2,8 +2,8 @@ public class Fraction {
     private final int nominator;
     private final int denominator;
 
-    public static Fraction JEDEN = new Fraction(1,1);
-    public static Fraction ZERO = new Fraction(0,1);
+    public static final Fraction JEDEN = new Fraction(1);
+    public static final Fraction ZERO = new Fraction(0);
 
     public Fraction(int nominator, int denominator) {
         if(denominator < 0) {
