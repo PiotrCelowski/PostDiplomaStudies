@@ -9,7 +9,7 @@ public class Date {
     private int month;
     private int year;
 
-    private Map<Integer, String> literalMonths = Stream.of(new Object[][] {
+    private Map<Object, Object> literalMonths = Stream.of(new Object[][] {
             {1,"JAN"},
             {2,"FEB"},
             {3,"MAR"},
@@ -22,7 +22,7 @@ public class Date {
             {10,"OCT"},
             {11,"NOV"},
             {12,"DEC"}
-    }).collect(Collectors.toMap(data -> data[0], data -> data[1]);
+    }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
 
     public int getDay() {
         return day;
@@ -52,7 +52,7 @@ public class Date {
         calendar.setTime(date);
 
         this.day = calendar.get(Calendar.DAY_OF_MONTH);
-        this.month = calendar.get(Calendar.MONTH);
+        this.month = calendar.get(Calendar.MONTH) + 1;
         this.year = calendar.get(Calendar.YEAR);
     }
 
@@ -99,12 +99,15 @@ public class Date {
     }
 
     public String getMonthDate(int month) {
-        
+        if(isMonthValid(month)) {
+            return literalMonths.get(month).toString();
+        } else
+            return "<<Wrong month>>";
     }
 
     @Override
     public String toString() {
-        return this.day + "-" + this.month + "-" + this.year;
+        return this.day + "-" + getMonthDate(this.month) + "-" + this.year;
     }
 
     public static void main(String[] args) {
