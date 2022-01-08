@@ -1,4 +1,4 @@
-package test;
+package backpacktest;
 import backpack.*;
 
 class BackpackTest {
