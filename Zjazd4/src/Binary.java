@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Binary {
     public static int convertBinaryToDecimal(String binaryNumber) {
@@ -130,10 +131,19 @@ public class Binary {
     }
 
     public static void main(String[] args) {
-        String five = "1010111";
-        String three = "101111";
-        String six = "101010";
-
-        System.out.println(multiplyBinaryNumbers(five,three));
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Write first binary number: ");
+        String first = scanner.next();
+        System.out.println("Write second binary number: ");
+        String second = scanner.next();
+        System.out.println("Do you want to do multiplication or addition? M/A");
+        String action = scanner.next();
+        if(action.equals("A")) {
+            System.out.println(addTwoBinaryNumbers(first, second));
+        } else if (action.equals("M")) {
+            System.out.println(multiplyBinaryNumbers(first, second));
+        } else {
+            System.out.println("Wrong input!");
+        }
     }
 }
