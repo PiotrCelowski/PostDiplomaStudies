@@ -19,6 +19,9 @@ public class Game {
         Game game = new Game(20, 40);
         game.addAgent(AgentsEnum.RABBIT);
         game.addAgent(AgentsEnum.RABBIT);
+        for(int i=0; i<5; i++) {
+            game.addAgent(AgentsEnum.FOOD);
+        }
         game.display();
 
     }

@@ -2,9 +2,10 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 public class Board extends JPanel {
     private final Field[][] board;
@@ -27,6 +28,13 @@ public class Board extends JPanel {
         this.width = columns * this.size + 50;
 
         this.agents = new ArrayList<>();
+
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                move();
+            }
+        });
     }
 
     public Field get(int x, int y) {
@@ -45,6 +53,10 @@ public class Board extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.WHITE);
+        g2d.fillRect(0,0, width, height);
+        g2d.setColor(Color.BLACK);
+
         for(int i=0; i<board.length; i++) {
             for(int j=0; j<board[0].length; j++) {
                 board[i][j].paint(g2d, size);
@@ -61,5 +73,14 @@ public class Board extends JPanel {
         int x = new Random().nextInt(this.board.length);
         agent.setPosition(x, y);
         this.agents.add(agent);
+
+        Collections.sort(agents);
+    }
+
+    public void move() {
+        for(Object agent : agents.toArray()) {
+            ((Agent) agent).move(this);
+        }
+        this.repaint();
     }
 }
