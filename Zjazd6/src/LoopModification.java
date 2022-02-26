@@ -13,10 +13,10 @@ public class LoopModification {
         System.out.println(sum);
     }
 
-    public void newWay() {
-        System.out.println(list.stream()
-                .map(number -> calculateX(number))
-                .reduce(0, Integer::sum));
+    public Integer newWay() {
+        return list.stream()
+                .map(n -> (2 * n * n - 5 * n + 6))
+                .reduce(0, Integer::sum);
     }
 
     private int calculateX(int n) {
@@ -27,6 +27,6 @@ public class LoopModification {
         LoopModification loopModification = new LoopModification();
         loopModification.oldWay();
         System.out.println("-----------------");
-        loopModification.newWay();
+        System.out.println(loopModification.newWay());
     }
 }
