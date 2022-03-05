@@ -90,8 +90,8 @@ public class SquareResults {
 
     public void calculateFunctionalWayWithFunctions(List<Integer> list) {
         Integer integer = list.stream()
-                .filter(el -> evenWithPredicate.apply(el))
-                .filter(limitWithPredicate)
+                .filter(it -> limitWithPredicate.apply(10).test(it))
+                .filter(it -> evenWithPredicate.apply(2).test(it))
                 .peek(printToScreenConsumer)
                 .limit(5)
                 .map(exp2UnaryOperator)
@@ -110,6 +110,7 @@ public class SquareResults {
         System.out.println("------------------------------------");
         squareResults.calculateFunctionalWayWithPredicates(integers);
         System.out.println("------------------------------------");
+        squareResults.calculateFunctionalWayWithFunctions(integers);
 
     }
 
