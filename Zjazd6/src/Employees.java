@@ -121,4 +121,6 @@ public class Employees {
         System.out.println(filterEmployees(employees.employees, isWoman()).stream()
                 .collect(Collectors.averagingInt(e -> e.age)));
     }
+
+
 }
